@@ -1,8 +1,6 @@
 package com.sunbeam.dto;
 
-import java.time.LocalDate;
-
-import javax.persistence.Column;
+import com.sunbeam.entity.Gender;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,17 +26,14 @@ public class CustomerDto {
 
 	private String customerEmail;
 	
-	private String gender;
+	private Gender gender;
 	
 	private int age;
 	
-
 	private String customerPhone;
 	
 	private String password;
 	
-	
-	
-	
+		
 
 }

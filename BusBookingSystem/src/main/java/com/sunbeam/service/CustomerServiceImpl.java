@@ -1,5 +1,7 @@
 package com.sunbeam.service;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +22,18 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	public String registerCustomer(CustomerDto dto)
 	{
-		System.out.println("Service:: "+dto);
-		Customer customer=mapper.map(dto, Customer.class);
-		
-		Customer persistantCust=customerdao.save(customer);
-		
-	
-		
+		//System.out.println("Service:: "+dto);
+		Customer customer=mapper.map(dto, Customer.class);	
+		customerdao.save(customer);		
 		return "Regisered Successfully";
 	}
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return customerdao.findAll();
+	}
+	
+	
 
 }

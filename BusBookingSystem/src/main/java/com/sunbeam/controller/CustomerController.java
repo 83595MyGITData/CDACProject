@@ -8,23 +8,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sunbeam.dto.CustomerDto;
-import com.sunbeam.service.CustomerServiceImpl;
+import com.sunbeam.dto.ReservationDto;
+import com.sunbeam.service.CustomerService;
+import com.sunbeam.service.ReservationService;
 
 
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
 	@Autowired	
-	CustomerServiceImpl customerservice;
+	private CustomerService customerservice;
+	
+	@Autowired
+	private ReservationService reservationservice;
 	
 	
 	@PostMapping("/register")
-	public ResponseEntity<?> RegisterCustomer(@RequestBody CustomerDto dto)
+	public ResponseEntity<?> registerCustomer(@RequestBody CustomerDto dto)
 	{
 		System.out.println(dto);
 		return ResponseEntity.ok(customerservice.registerCustomer(dto));
-		
+	}
 	
+	@PostMapping("/seatReservation")
+	public ResponseEntity<?> doReservation(@RequestBody ReservationDto dto)
+	{
+		return ResponseEntity.ok(reservationservice.addReservation(dto));
 	}
 	
 

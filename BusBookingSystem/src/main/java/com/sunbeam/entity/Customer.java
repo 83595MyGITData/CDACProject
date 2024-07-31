@@ -24,8 +24,10 @@ public class Customer extends BaseEntity {
 	
 	@Column(name = "customer_fname")
 	private String customerFname;
+	
 	@Column(name = "customer_lname")
 	private String customerLname;
+	
 	@Column(name = "customer_email")
 	private String customerEmail;
 	
@@ -38,7 +40,9 @@ public class Customer extends BaseEntity {
 	@Column(name = "password")
 	private String password;
 	
-	
+	@Column(name = "address")
+	private String address;
+
 	
 	@Column(name = "age")
 	private int age;
