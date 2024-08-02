@@ -1,6 +1,7 @@
 package com.sunbeam.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sunbeam.dto.BusDto;
 import com.sunbeam.dto.CustomerDto;
 import com.sunbeam.dto.ScheduleDto;
+import com.sunbeam.exceptions.ResourceNotFoundException;
 import com.sunbeam.service.BusService;
 import com.sunbeam.service.CustomerService;
 import com.sunbeam.service.ScheduleService;
@@ -37,45 +39,82 @@ public class AdminController {
 	@PostMapping("/AddBus")
 	public ResponseEntity<?> registerBus(@RequestBody BusDto dto)
 	{
-		//System.out.println(dto);
-		return ResponseEntity.ok(busservice.addBus(dto));
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(busservice.addBus(dto));
+		}
+		catch(RuntimeException e){
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResourceNotFoundException( e.getMessage()));
+			
+		}
 	}
 	
 	@GetMapping("/GetAllBuses")
 	public ResponseEntity<?> getAllBuses()
 	{
-		return ResponseEntity.ok(busservice.getAllBuses());
+		try {
+			return  ResponseEntity.status(HttpStatus.OK).body(busservice.getAllBuses());
+			}
+		catch(RuntimeException e)
+		{
+			return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		
 	}
 	
 	///Customers
 	@PostMapping("/AddCustomer")
 	public ResponseEntity<?> RegisterCustomer(@RequestBody CustomerDto dto)
 	{
-		System.out.println(dto);
-		return ResponseEntity.ok(customerservice.registerCustomer(dto));
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(customerservice.registerCustomer(dto));
+		}
+		catch(RuntimeException e){
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResourceNotFoundException( e.getMessage()));
+			
+		}
 	}
 	
 	@GetMapping("/GetAllCustomers")
 	public ResponseEntity<?> getAllCustomers()
 	{
-		return ResponseEntity.ok(customerservice.getAllCustomers());
+		try {
+			return  ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllCustomers());
+			}
+		catch(RuntimeException e)
+		{
+			return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		
 	}
 	
 	///Schedule
 		@PostMapping("/AddSchedule")
 		public ResponseEntity<?> addSchedule(@RequestBody ScheduleDto dto)
 		{
-			System.out.println(dto);
-			return ResponseEntity.ok(scheduleservice.AddShedule(dto));
+			try {
+				return ResponseEntity.status(HttpStatus.CREATED).body(scheduleservice.AddShedule(dto));
+			}
+			catch(RuntimeException e){
+				
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResourceNotFoundException( e.getMessage()));
+				
+			}
+		
 		}
 		
 		@GetMapping("/GetAllSchedule")
 		public ResponseEntity<?> getAllSchedule()
 		{
-			return ResponseEntity.ok(scheduleservice.GetAllSchedule());
+			try {
+				return  ResponseEntity.status(HttpStatus.OK).body(scheduleservice.GetAllSchedule());
+				}
+			catch(RuntimeException e)
+			{
+				return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+			}
 		}
-	
-	
-	
+		
 
 }
