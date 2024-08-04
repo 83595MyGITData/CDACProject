@@ -6,6 +6,8 @@ import Login from './screens/login';
 import Register from './screens/register';
 import Customer from './screens/Customer'; 
 import Home from './screens/home';
+import AddBus from './screens/addBus';
+import BusList from './screens/buslist';
 function App() {
   return (
     <div>
@@ -16,6 +18,8 @@ function App() {
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/register' element={<Register/>}></Route>
       <Route path='/customer' element={<Customer/>}></Route>
+      <Route path='/addbus' element={<AddBus/>}></Route>
+      <Route path='/buslist' element={<BusList/>}></Route>
       
       </Routes>
       <ToastContainer/>
