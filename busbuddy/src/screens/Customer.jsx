@@ -1,11 +1,11 @@
 import { useState } from 'react'
-//import Navbar from '../components/navbar'
+import Navbar from '../components/navbar'
 import customersData from '../dummy/users.json'
 import { getCustomers } from "../services/admin"
 import { useEffect } from 'react'
 
 function Customers() {
-    
+  
     const [customers, setCustomers] = useState([])
     const loadCustomers = async () => {
         const result = await getCustomers()
@@ -23,7 +23,7 @@ function Customers() {
     }, [])
   return (
     <div>
-     
+     <Navbar />
       <h2 className='page-header'>customers</h2>
       <table className='table table-striped'>
         <thead>
