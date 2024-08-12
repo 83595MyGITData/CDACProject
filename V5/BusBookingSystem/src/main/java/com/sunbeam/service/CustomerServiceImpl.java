@@ -30,10 +30,10 @@ public class CustomerServiceImpl implements CustomerService {
 	{
 		//System.out.println("Service:: "+dto);
 		Customer customer=mapper.map(dto, Customer.class);
-		customer.setRole(Role.ROLE_ADMIN);
+		customer.setRole(Role.ROLE_CUSTOMER);
 		customer.setPassword(passwordEncoder.encode(customer.getPassword()));
 		customerdao.save(customer);		
-		return "Registered Successfully";
+		return "Regisered Successfully";
 	}
 
 	@Override
@@ -46,11 +46,9 @@ public class CustomerServiceImpl implements CustomerService {
 		String email=dto.getCustomerEmail();
 		String password=dto.getPassword();
 		Customer customer= customerdao.findByCustomerEmailAndPassword(email,password);
-		
 		if(customer==null) {
 			return  new ApiResponse("Invalied Email and Password");
 		}
-		System.out.println("Customer Service:"+customer);
 //		if(customer!=null){
 //		 if(customer.getPassword()==dto.getPassword()) {
 //			 return new ApiResponse("Login Successfully");
@@ -59,6 +57,20 @@ public class CustomerServiceImpl implements CustomerService {
 //		return new ApiResponse("Invalie Password");
 //	}
 		return new ApiResponse("Login Successfully");
+	}
+
+	@Override
+	public Customer GetUserByID(Long id) {
+	
+		Customer customer= customerdao.findById(id).orElseThrow(()-> new RuntimeException( "Invalid user ID"));
+		return customer;
+	}
+
+	@Override
+	public String removedStatus(Long id) {
+		Customer customer= customerdao.findById(id).orElseThrow(()-> new RuntimeException( "Invalid user ID"));
+		customer.setRemovedStatus(true);
+		return "User suspended Successfully";
 	}
 	
 	

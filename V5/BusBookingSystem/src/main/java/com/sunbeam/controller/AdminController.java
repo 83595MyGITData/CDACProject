@@ -23,7 +23,7 @@ import com.sunbeam.service.CustomerService;
 import com.sunbeam.service.RouteService;
 import com.sunbeam.service.ScheduleService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/Admin")
 public class AdminController {
@@ -154,7 +154,7 @@ public class AdminController {
 			}
 		}
 
-		@PutMapping("/deleteBus/{id}")
+@PutMapping("/deleteBus/{id}")
 		public ResponseEntity<?> deleteBus(@PathVariable Long id)
 		{
 			try {
@@ -165,6 +165,50 @@ public class AdminController {
 				return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 			}
 		}
+@GetMapping("/GetUserByID/{id}")
+public ResponseEntity<?> getUserByID(@PathVariable Long id)
+{
+	try {
+		return  ResponseEntity.status(HttpStatus.OK).body(customerservice.GetUserByID(id));
+		}
+	catch(RuntimeException e)
+	{
+		return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	}
+}
+@GetMapping("/GetBusById/{id}")
+public ResponseEntity<?> GetBusById(@PathVariable Long id)
+{
+	try {
+		return  ResponseEntity.status(HttpStatus.OK).body(busservice.GetBusById(id));
+		}
+	catch(RuntimeException e)
+	{
+		return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	}
+}
+@GetMapping("/GetRouteById/{id}")
+public ResponseEntity<?> GetRouteById(@PathVariable Long id)
+{
+	try {
+		return  ResponseEntity.status(HttpStatus.OK).body(routeservice.getRouteById(id));
+		}
+	catch(RuntimeException e)
+	{
+		return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	}
+}
+@PutMapping("/removedStatus/{id}")
+public ResponseEntity<?> RemovedStatus(@PathVariable Long id)
+{
+	try {
+		return  ResponseEntity.status(HttpStatus.OK).body(customerservice.removedStatus(id));
+		}
+	catch(RuntimeException e)
+	{
+		return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	}
+}
 		
 		
 		

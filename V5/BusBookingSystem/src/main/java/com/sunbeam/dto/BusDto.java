@@ -36,10 +36,10 @@ public class BusDto{
 	
 	private LocalDate journeyDate; 
 	
-	 //@JsonFormat(pattern = "HH:mm:ss")
+	 @JsonFormat(pattern = "HH:mm:ss")
 	    private LocalTime departureTime;
 
-	   // @JsonFormat(pattern = "HH:mm:ss")
+	    @JsonFormat(pattern = "HH:mm:ss")
 	    private LocalTime arrivalTime;
 
 

@@ -11,14 +11,6 @@ import com.sunbeam.entity.Customer;
 public class CustomUserDetails implements UserDetails {
 	private Customer user;
 
-	public Customer getUser() {
-		return user;
-	}
-
-	public void setUser(Customer user) {
-		this.user = user;
-	}
-
 	public CustomUserDetails(Customer user) {
 		super();
 		this.user = user;

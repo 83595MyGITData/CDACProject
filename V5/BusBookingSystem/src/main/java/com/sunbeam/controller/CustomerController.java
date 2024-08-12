@@ -21,15 +21,13 @@ import com.sunbeam.dto.CustomerDto;
 import com.sunbeam.dto.LoginDto;
 import com.sunbeam.dto.ReservationDto;
 import com.sunbeam.dto.SigninResponse;
-import com.sunbeam.entity.Customer;
 import com.sunbeam.exceptions.ResourceNotFoundException;
-import com.sunbeam.security.CustomUserDetails;
 import com.sunbeam.security.JwtUtils;
 import com.sunbeam.service.BusService;
 import com.sunbeam.service.CustomerService;
 import com.sunbeam.service.ReservationService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 //@EnableMethodSecurity(prePostEnabled = true)
 @RequestMapping("/customers")
@@ -103,7 +101,7 @@ public class CustomerController {
 //			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResourceNotFoundException( e.getMessage()));	
 //		}
 //	}
-	@PostMapping("/login")
+	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@RequestBody 
 			@Valid LoginDto request) {
 		System.out.println("in sign in" + request);
@@ -116,12 +114,10 @@ public class CustomerController {
 		SecurityContextHolder.getContext().setAuthentication(verifiedToken);
 		//=> auth successful !
 		System.out.println(verifiedToken.getPrincipal().getClass());//custom user details object
-		CustomUserDetails userDetail= (CustomUserDetails)verifiedToken.getPrincipal();
-		Customer customer= userDetail.getUser();
 		//create JWT n send it to the clnt in response
 		SigninResponse resp=new SigninResponse
 				(jwtUtils.generateJwtToken(verifiedToken),
-				"Successful Auth!!!!",customer);
+				"Successful Auth!!!!");
 		return ResponseEntity.
 				status(HttpStatus.CREATED).body(resp);
 	}

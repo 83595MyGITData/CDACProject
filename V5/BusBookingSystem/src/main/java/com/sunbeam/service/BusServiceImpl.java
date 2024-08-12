@@ -75,6 +75,12 @@ public class BusServiceImpl implements BusService {
         bus.getSeatStatus().size();
         return bus.getSeatStatus();
 	}
+
+	@Override
+	public Bus GetBusById(Long busId) {
+		Bus bus = busdao.findById(busId).orElseThrow(() -> new RuntimeException("Bus Id is incorrect"));
+		return bus;
+	}
 	
 		
 }

@@ -6,6 +6,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +35,6 @@ public class Customer extends BaseEntity {
 	@Column(name = "customer_email",unique =true)
 	private String customerEmail;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "gender")
 	private Gender gender;
 	
@@ -41,6 +42,7 @@ public class Customer extends BaseEntity {
 	private String customerPhone;
 	
 	@Column(name = "password")
+	@JsonIgnore
 	private String password;
 	
 	@Column(name = "address")
@@ -52,6 +54,8 @@ public class Customer extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Role role;
+	@Column(name = "removedStatus")
+	private boolean removedStatus;
 	
 	
 
