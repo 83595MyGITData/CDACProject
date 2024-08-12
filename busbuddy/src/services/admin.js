@@ -21,6 +21,9 @@ export async function register(customerFname, customerLname, customerEmail, pass
 
   //return null
 }
+export async function getBusList(){
+  
+}
 
 export async function getCustomers() {
   try {
